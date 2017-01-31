@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dk.cphbusiness</groupId>
-    <artifactId>ex1</artifactId>
+    <artifactId>ex2</artifactId>
 
     <build>
         <plugins>
