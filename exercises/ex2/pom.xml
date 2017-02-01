@@ -6,6 +6,7 @@
 
     <groupId>dk.cphbusiness</groupId>
     <artifactId>ex2</artifactId>
+         <version>1.0</version>
 
     <build>
         <plugins>
