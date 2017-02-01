@@ -1,6 +1,7 @@
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <h2>Task 2</h2>
@@ -17,7 +18,7 @@ import java.util.Iterator;
 public class Even implements Iterator<Long> {
 
     // The counter containing the number the iterator has reached.
-    private long counter;
+    private AtomicLong counter = new AtomicLong(-2);
 
     /**
      * This has 2^64 numbers. That's a lot!
@@ -27,6 +28,7 @@ public class Even implements Iterator<Long> {
     @Override
     public boolean hasNext() {
         // Don't change this: we assume we always have another number
+
         return true;
     }
 
@@ -34,8 +36,10 @@ public class Even implements Iterator<Long> {
      * @return The next even number in the iterator.
      */
     @Override
-    public Long next() {
-        throw new NotImplementedException();
+    public synchronized Long next() {
+        counter.incrementAndGet();
+        return counter.incrementAndGet();
+        // counter.addAndGet(2);
     }
 
     /**

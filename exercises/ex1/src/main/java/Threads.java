@@ -21,13 +21,44 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class Threads {
 
+    public void printNumberToScreen(Integer number) {
+        System.out.println(number);
+    }
+
+    public Integer increaseNumberByOne(Integer number) {
+        Integer newNumber = number++;
+        return newNumber;
+    }
+
+    public void loopAndPrintallNumbersFromOneToOneBillion() {
+        boolean isCounterBelowOneBillion = true;
+        Integer counter = 0;
+        Integer number = 0;
+
+        while (isCounterBelowOneBillion) {
+
+            increaseNumberByOne(number);
+            printNumberToScreen(number);
+
+            counter++;
+            if (counter > 1000000) {
+                isCounterBelowOneBillion = false;
+            }
+        }
+    }
+
     /**
      * Starts three threads that execute three methods simultaneously.
      *
      * @param args Input arguments to the main method. Unused.
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
-    }
+        Runnable runnable = new Runnable() {
+            public void run() {
+                new Threads().loopAndPrintallNumbersFromOneToOneBillion();
+            }
+        };
 
+
+    }
 }
