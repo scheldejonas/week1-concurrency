@@ -13,6 +13,12 @@ Test your server using a telnet client
 Write you own client, which can connect to your TCP time server and print the time.
 
 ## 3) Echo server with extended protocol
+The Echo server can be found here: [https://github.com/CphBusCosSem3/week1-concurrency/tree/master/exercises/ex3/protocol](https://github.com/CphBusCosSem3/week1-concurrency/tree/master/exercises/ex3/protocol)
+
+This package contains two classes: An ``EchoClient`` and a ``EchoServer``. The server listens for connections forever,
+and when a connection is established, it listens to the input and simply echoes the same back to the client.
+The client connects to the server and writes a string. When it writes it waits for a reply, prints it and quits.
+
 Expand the echo server we did together in the class with the following behaviour.
 
 | Message sent from client to server | Reply from server |
