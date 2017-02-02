@@ -1,8 +1,7 @@
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Optional;
@@ -47,7 +46,44 @@ public class UrlRetriever extends Thread {
      */
     @Override
     public void run() {
-        throw new NotImplementedException();
+        try {
+            byte[] urlByteArray = saveBinaryFileFromUrl("https://wordpress.org/plugins/about/readme.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private byte[] saveBinaryFileFromUrl(String url) throws IOException {
+        URL u = new URL(url);
+        URLConnection uc = u.openConnection();
+        String contentType = uc.getContentType();
+        int contentLength = uc.getContentLength();
+        if (contentType.startsWith("text/") || contentLength == -1) {
+            throw new IOException("This is not a binary file.");
+        }
+        InputStream raw = uc.getInputStream();
+        InputStream in = new BufferedInputStream(raw);
+        byte[] data = new byte[contentLength];
+        int bytesRead = 0;
+        int offset = 0;
+        while (offset < contentLength) {
+            bytesRead = in.read(data, offset, data.length - offset);
+            if (bytesRead == -1)
+                break;
+            offset += bytesRead;
+        }
+        in.close();
+        if (offset != contentLength) {
+            throw new IOException("Only read " + offset + " bytes; Expected " + contentLength + " bytes");
+        }
+
+        String filename;
+        filename = u.getFile().substring(filename.lastIndexOf('/') + 1);
+        FileOutputStream out = new FileOutputStream(filename);
+        out.write(data);
+        out.flush();
+        out.close();
+        return data;
     }
 
     /**
@@ -55,7 +91,7 @@ public class UrlRetriever extends Thread {
      * thread is done, {@link Optional#empty()} is returned.
      */
     public Optional<Byte[]> getData() throws IllegalStateException {
-        throw new NotImplementedException();
+        if ()
     }
 
     /**

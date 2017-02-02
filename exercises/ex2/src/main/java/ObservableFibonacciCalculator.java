@@ -51,7 +51,11 @@ public class ObservableFibonacciCalculator extends Thread {
      */
     private long fibonacci(long n) {
         // Implement fibonacci here
-        throw new NotImplementedException();
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
     }
 
     /**
@@ -71,15 +75,24 @@ public class ObservableFibonacciCalculator extends Thread {
     public void run() {
         // 1: Get the result of the fibonacci sequence
         // 2: Notify all the observers who subscribed to this class
+        long value = fibonacci(fibonacciLength);
+        for (FibonacciObserver observer : observers) {
+            observer.dataReady(value);
+        }
     }
+
 
     /**
      * Runs the fibonacci calculator and prints the result when it's done.
      */
     public static void main(String[] args) {
         // 1: Register an observer
+        FibonacciObserver fibonacciObserver = (data) -> System.out.println(data);
         // 2: Start the calculation in a thread
+        ObservableFibonacciCalculator observableFibonacciCalculator = new ObservableFibonacciCalculator(50);
         // 3: Wait for a result
+        observableFibonacciCalculator.registerFibonacciObserver(fibonacciObserver);
+        observableFibonacciCalculator.start();
         // 4: Print the result
     }
 
