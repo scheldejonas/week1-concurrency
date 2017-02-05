@@ -32,11 +32,6 @@ Or, if you're smart, do all of the above.
 [Research shows](https://en.wikipedia.org/wiki/Learning_theory_(education)#Multimedia_learning)
 that you learn better when you do different things.
 
-## Assignment correction
-To give you better feedback on your assignments a small assignment corrector have been
-deployed to automatically test your assignments against our (secret) tests and give
-you feedback on the quality of your code. The tool will be introduced in the class.
-
 ## Getting in touch
 We are happy to answer questions you might have, but we are also encouraging you
 to try and find the solutions yourselves; that is often the most fun! But never
